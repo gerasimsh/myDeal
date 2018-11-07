@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Deal</string>
+    <string name="deal_title_label">TITLE</string>
+    <string name="deal_crime_hint">Enter a title for the deal</string>
+    <string name="deal_details_label">DETAILS</string>
+    <string name="deal_solved_label">Solved</string>
+    <string name="deal_title">Deal Title</string>
+    <string name="deal_date">Deal Date</string>
+</resources>
