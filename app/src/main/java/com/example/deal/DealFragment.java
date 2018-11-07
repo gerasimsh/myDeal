@@ -14,6 +14,11 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 
+import java.text.DateFormat;
+import java.util.Calendar;
+
+import static java.text.DateFormat.FULL;
+
 
 public class DealFragment extends Fragment {
     private Deal mDeal;
@@ -48,8 +53,11 @@ public class DealFragment extends Fragment {
 
             }
         });
+        Calendar calendar = Calendar.getInstance();
+        String mCurrentDate = DateFormat.getDateInstance(FULL).format(calendar.getTime());
+
         mDateBtn = (Button) v.findViewById(R.id.deal_date);
-        mDateBtn.setText(mDeal.getDate().toString());
+        mDateBtn.setText(mCurrentDate);
         mDateBtn.setEnabled(false);
 
         mSolvedChb = (CheckBox) v.findViewById(R.id.deal_solved);
