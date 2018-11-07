@@ -9,10 +9,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
+
+import static android.view.View.GONE;
 
 
 public class DealListFragment extends Fragment {
@@ -50,7 +53,7 @@ public class DealListFragment extends Fragment {
 
         private TextView mTitleTextView;
         private TextView mDateTextView;
-
+        private ImageView mSolvedImageView;
         private Deal mDeal;
 
 
@@ -67,14 +70,19 @@ public class DealListFragment extends Fragment {
                 }
             });
 
-            mTitleTextView = (TextView) itemView.findViewById(R.id.deal_title);
-            mDateTextView = (TextView) itemView.findViewById(R.id.deal_date);
+            mTitleTextView = (TextView)
+                    itemView.findViewById(R.id.deal_title);
+            mDateTextView = (TextView)
+                    itemView.findViewById(R.id.deal_date);
             Log.i(TAG, "dealHolder");
+//            mSolvedImageView = (ImageView)
+//                    itemView.findViewById(R.id.deal_solved);
         }
             public void bind (Deal deal){
             mDeal = deal;
             mTitleTextView.setText(mDeal.getTitle());
             mDateTextView.setText(mDeal.getDate().toString());
+
         }
         /*@Override
         public void onClick(View view){
