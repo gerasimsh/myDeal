@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -45,11 +47,40 @@ public class DealListFragment extends Fragment {
     private class DealHolder extends RecyclerView.ViewHolder {
 
 
-        public DealHolder(LayoutInflater inflater, ViewGroup parent) {
 
+        private TextView mTitleTextView;
+        private TextView mDateTextView;
+
+        private Deal mDeal;
+
+
+
+
+        public DealHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.list_item_deal, parent, false));
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getActivity(),
+                            mDeal.getTitle()+" clicked!", Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
+            mTitleTextView = (TextView) itemView.findViewById(R.id.deal_title);
+            mDateTextView = (TextView) itemView.findViewById(R.id.deal_date);
             Log.i(TAG, "dealHolder");
         }
+            public void bind (Deal deal){
+            mDeal = deal;
+            mTitleTextView.setText(mDeal.getTitle());
+            mDateTextView.setText(mDeal.getDate().toString());
+        }
+        /*@Override
+        public void onClick(View view){
+            Toast.makeText(getActivity(),
+                    mDeal.getTitle()+" clicked!", Toast.LENGTH_SHORT).show();
+        }*/
 
     }
 
@@ -71,6 +102,8 @@ public class DealListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull DealHolder dealHolder, int i) {
+            Deal deal = mDeals.get(i);
+            dealHolder.bind(deal);
 
         }
 
