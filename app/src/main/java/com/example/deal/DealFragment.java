@@ -16,15 +16,26 @@ import android.widget.EditText;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.UUID;
 
 import static java.text.DateFormat.FULL;
 
 
 public class DealFragment extends Fragment {
+    private static final String ARG_DEAL_ID = "deal_id";
     private Deal mDeal;
     private EditText mTitleField;
     private Button mDateBtn;
     private CheckBox mSolvedChb;
+
+    public static DealFragment newInstance(UUID crimeId) {
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_DEAL_ID, crimeId);
+        DealFragment fragment = new DealFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,7 +46,7 @@ public class DealFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_deal,container,false);
+        View v = inflater.inflate(R.layout.fragment_deal, container, false);
         mTitleField = (EditText) v.findViewById(R.id.deal_title);
         mTitleField.addTextChangedListener(new TextWatcher() {
             @Override

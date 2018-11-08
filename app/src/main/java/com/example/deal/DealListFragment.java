@@ -1,5 +1,6 @@
 package com.example.deal;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -37,13 +38,22 @@ public class DealListFragment extends Fragment {
         updateUI();
         return view;
     }
+    @Override
+    public void onResume(){
+        super.onResume();
+        updateUI();
+    }
 
     private void updateUI() {
         Log.i(TAG, "updateUI");
         DealLab dealLab = DealLab.get(getActivity());
         List<Deal> deals = dealLab.getDeals();
-        mAdapter = new DealAdapter(deals);
-        mDealRecyclerView.setAdapter(mAdapter);
+        if(mAdapter==null) {
+            mAdapter = new DealAdapter(deals);
+            mDealRecyclerView.setAdapter(mAdapter);
+        }else {
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
     ////______________View holder_________________________!!отвечает за раздувание макета
@@ -66,7 +76,7 @@ public class DealListFragment extends Fragment {
                 public void onClick(View v) {
                     Toast.makeText(getActivity(),
                             mDeal.getTitle()+" clicked!", Toast.LENGTH_SHORT).show();
-
+                    Intent intent = DealPagerActivity.newIntent(getActivity(),mDeal.getId());
                 }
             });
 
